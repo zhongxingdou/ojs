@@ -1,0 +1,19 @@
+{
+  "name": "ojs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhongxingdou/ojs.git"
+  },
+  "author": "zhongxingdou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhongxingdou/ojs/issues"
+  },
+  "homepage": "https://github.com/zhongxingdou/ojs"
+}
