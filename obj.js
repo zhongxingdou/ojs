@@ -50,9 +50,29 @@ var obj = {
 
     return result
   },
+  hasChanges: function() {
+    return this._changes.length > 0
+  },
   // 获取属性值
   get: function(prop) {
     return this.property[prop]
+  },
+  has: function(prop) {
+    if(this.isProxy) {
+        return this.target.has(prop)
+    }else {
+        return this.property.hasOwnProperty(prop)
+    }
+  },
+  set: function(prop, value) {
+    if(prop === 'id')return 
+        
+    if(!this.has(prop)) {
+        this.prop(prop, value)
+    } else {
+        this[prop] = value
+    }
+    return this
   },
   // 设置属性值
   setAndSave: function(prop, value) {
@@ -112,6 +132,16 @@ var obj = {
   // 从存储中恢复属性的值
   fetch: function() {
     invokePlugins('fetch', this, arguments)
+
+    // clear changes
+    this._changes = []
+
+    // reset lastStored
+    var self = this
+    var _last = this._lastStored
+    this.propKeys().forEach(function(prop) {
+      _last[prop] = self.property[prop]
+    })
   },
   // 保存属性到存储中
   store: function() {
@@ -156,7 +186,7 @@ var obj = {
     })
 
     obj.id = ++id
-    obj.store()
+    obj.fetch()
 
     return obj
   },
@@ -168,6 +198,8 @@ var obj = {
       store: [],
       destroy: []
     }
+    obj.isProxy = true
+    obj.target = this
     return obj
   }
 }

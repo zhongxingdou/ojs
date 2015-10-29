@@ -27,7 +27,7 @@ var localStorePlugin = {
     var json = localStorage.getItem(this.id)
     var props = JSON.parse(json)
     for (var prop in props) {
-      this[prop] = props[prop]
+      this.set(prop, props[prop])
     }
     next()
   },
@@ -67,9 +67,11 @@ var htmlPlugin = {
 
 var o2 = o.clone()
 
-o2.prop('name', 'hal3')
-o2.prop('age', 30)
-o2.store()
+if(!o2.has('name')){
+  o2.prop('name', 'hal')
+  o2.prop('age' , 30)
+  o2.store()
+}
 
 // o2 view
 var o2FormView = o2.proxy()
