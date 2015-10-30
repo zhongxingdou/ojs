@@ -20,10 +20,12 @@ var o = require('./obj.js')
 
 var localStorePlugin = {
   store: function(next) {
+    console.info('store in localStorage')
     localStorage.setItem(this.id, JSON.stringify(this.property))
     next()
   },
   fetch: function(next) {
+    console.info('fetch from localStorage')
     var json = localStorage.getItem(this.id)
     var props = JSON.parse(json)
     for (var prop in props) {
@@ -50,6 +52,7 @@ var htmlPlugin = {
         form[prop].value = $this.get(prop)
       }
     })
+
     next()
   },
   store: function(next) {
@@ -66,6 +69,7 @@ var htmlPlugin = {
 }
 
 var o2 = o.clone()
+o2.fetch()
 
 if(!o2.has('name')){
   o2.prop('name', 'hal')
