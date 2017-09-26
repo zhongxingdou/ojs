@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/zhongxingdou/ojs/issues"
   },
-  "homepage": "https://github.com/zhongxingdou/ojs"
+  "homepage": "https://github.com/zhongxingdou/ojs",
+  "devDependencies": {
+    "webpack": "^3.6.0"
+  }
 }
